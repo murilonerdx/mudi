@@ -13,23 +13,28 @@ public class Pedido {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String nomeProduto;
-    private BigDecimal valorNegociacao;
+    private BigDecimal valorNegociado;
     private LocalDate dataDaEntrega;
     private String urlProduto;
     private String urlImagem;
     private String descricao;
 
-    public Pedido(String nomeProduto, BigDecimal valorNegociacao, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao) {
+    public Pedido(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao) {
+        this.id = id;
         this.nomeProduto = nomeProduto;
-        this.valorNegociacao = valorNegociacao;
+        this.valorNegociado = valorNegociado;
         this.dataDaEntrega = dataDaEntrega;
         this.urlProduto = urlProduto;
         this.urlImagem = urlImagem;
         this.descricao = descricao;
     }
 
-    public Pedido() {
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNomeProduto() {
@@ -40,12 +45,12 @@ public class Pedido {
         this.nomeProduto = nomeProduto;
     }
 
-    public BigDecimal getValorNegociacao() {
-        return valorNegociacao;
+    public BigDecimal getValorNegociado() {
+        return valorNegociado;
     }
 
-    public void setValorNegociacao(BigDecimal valorNegociacao) {
-        this.valorNegociacao = valorNegociacao;
+    public void setValorNegociado(BigDecimal valorNegociado) {
+        this.valorNegociado = valorNegociado;
     }
 
     public LocalDate getDataDaEntrega() {
@@ -80,11 +85,8 @@ public class Pedido {
         this.descricao = descricao;
     }
 
-    public Long getId() {
-        return id;
+    public Pedido() {
+
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
