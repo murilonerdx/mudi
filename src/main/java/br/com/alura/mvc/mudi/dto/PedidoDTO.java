@@ -1,22 +1,28 @@
 package br.com.alura.mvc.mudi.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class PedidoDTO {
     private Long id;
+
+    @NotBlank @Min(5) @Max(20)
     private String nomeProduto;
-    private BigDecimal valorNegociado;
-    private LocalDate dataDaEntrega;
+
+    @NotBlank
     private String urlProduto;
+
+    @NotBlank
     private String urlImagem;
+
     private String descricao;
 
-    public PedidoDTO(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao) {
+    public PedidoDTO(Long id, String nomeProduto, String urlProduto, String urlImagem, String descricao) {
         this.id = id;
         this.nomeProduto = nomeProduto;
-        this.valorNegociado = valorNegociado;
-        this.dataDaEntrega = dataDaEntrega;
         this.urlProduto = urlProduto;
         this.urlImagem = urlImagem;
         this.descricao = descricao;
@@ -36,22 +42,6 @@ public class PedidoDTO {
 
     public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
-    }
-
-    public BigDecimal getValorNegociado() {
-        return valorNegociado;
-    }
-
-    public void setValorNegociado(BigDecimal valorNegociado) {
-        this.valorNegociado = valorNegociado;
-    }
-
-    public LocalDate getDataDaEntrega() {
-        return dataDaEntrega;
-    }
-
-    public void setDataDaEntrega(LocalDate dataDaEntrega) {
-        this.dataDaEntrega = dataDaEntrega;
     }
 
     public String getUrlProduto() {

@@ -94,8 +94,6 @@ public class Pedido {
     public Pedido toPedido(PedidoDTO pedidoDTO) {
         this.id = pedidoDTO.getId();
         this.nomeProduto = pedidoDTO.getNomeProduto();
-        this.valorNegociado = pedidoDTO.getValorNegociado();
-        this.dataDaEntrega = pedidoDTO.getDataDaEntrega();
         this.urlProduto = pedidoDTO.getUrlProduto();
         this.urlImagem = pedidoDTO.getUrlImagem();
         this.descricao = pedidoDTO.getDescricao();
