@@ -1,18 +1,9 @@
-package br.com.alura.mvc.mudi.entities;
+package br.com.alura.mvc.mudi.dto;
 
-import br.com.alura.mvc.mudi.dto.PedidoDTO;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-public class Pedido {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+public class PedidoDTO {
     private Long id;
     private String nomeProduto;
     private BigDecimal valorNegociado;
@@ -21,7 +12,7 @@ public class Pedido {
     private String urlImagem;
     private String descricao;
 
-    public Pedido(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao) {
+    public PedidoDTO(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao) {
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.valorNegociado = valorNegociado;
@@ -86,20 +77,4 @@ public class Pedido {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    public Pedido() {
-
-    }
-
-    public Pedido toPedido(PedidoDTO pedidoDTO) {
-        this.id = pedidoDTO.getId();
-        this.nomeProduto = pedidoDTO.getNomeProduto();
-        this.valorNegociado = pedidoDTO.getValorNegociado();
-        this.dataDaEntrega = pedidoDTO.getDataDaEntrega();
-        this.urlProduto = pedidoDTO.getUrlProduto();
-        this.urlImagem = pedidoDTO.getUrlImagem();
-        this.descricao = pedidoDTO.getDescricao();
-        return this;
-    }
-
 }
