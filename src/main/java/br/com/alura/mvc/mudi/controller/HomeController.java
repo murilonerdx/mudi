@@ -1,11 +1,14 @@
 package br.com.alura.mvc.mudi.controller;
 
 import br.com.alura.mvc.mudi.entities.Pedido;
+import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,12 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
     @Autowired
     private PedidoRepository repository;
 
-    @GetMapping("/home")
+    @GetMapping()
     public String home(Model model) {
 //        Pedido pedido = new Pedido();
 //        pedido.setNomeProduto("Xiaomi Redmi Note 8");
@@ -30,7 +34,21 @@ public class HomeController {
 
         List<Pedido> pedidos = repository.findAll();
 
+
         model.addAttribute("pedidos", pedidos);
         return "home";
+    }
+
+    @GetMapping("/{status}")
+    public String porStatus(@PathVariable("status") String status, Model model) {
+        try{
+            List<Pedido> pedidos = repository.findByStatus(StatusPedido.valueOf(status.toUpperCase()));
+            model.addAttribute("pedidos", pedidos);
+            model.addAttribute("status", status);
+
+            return "home";
+        }catch(IllegalArgumentException e){
+            return "redirect:/home";
+        }
     }
 }
