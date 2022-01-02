@@ -1,11 +1,11 @@
 package br.com.alura.mvc.mudi.entities;
 
 import br.com.alura.mvc.mudi.dto.PedidoDTO;
+import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,11 +17,23 @@ public class Pedido {
     private String nomeProduto;
     private BigDecimal valorNegociado;
     private LocalDate dataDaEntrega;
+
+    @Column(length=5000)
     private String urlProduto;
+
+    @Column(length=5000)
     private String urlImagem;
+
+    @Lob
     private String descricao;
 
-    public Pedido(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao) {
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
+    public Pedido() {
+    }
+
+    public Pedido(Long id, String nomeProduto, BigDecimal valorNegociado, LocalDate dataDaEntrega, String urlProduto, String urlImagem, String descricao, StatusPedido status) {
         this.id = id;
         this.nomeProduto = nomeProduto;
         this.valorNegociado = valorNegociado;
@@ -29,6 +41,7 @@ public class Pedido {
         this.urlProduto = urlProduto;
         this.urlImagem = urlImagem;
         this.descricao = descricao;
+        this.status = status;
     }
 
     public Long getId() {
@@ -87,8 +100,12 @@ public class Pedido {
         this.descricao = descricao;
     }
 
-    public Pedido() {
+    public StatusPedido getStatus() {
+        return status;
+    }
 
+    public void setStatus(StatusPedido status) {
+        this.status = status;
     }
 
     public Pedido toPedido(PedidoDTO pedidoDTO) {
@@ -97,6 +114,7 @@ public class Pedido {
         this.urlProduto = pedidoDTO.getUrlProduto();
         this.urlImagem = pedidoDTO.getUrlImagem();
         this.descricao = pedidoDTO.getDescricao();
+        this.status = pedidoDTO.getStatus();
         return this;
     }
 

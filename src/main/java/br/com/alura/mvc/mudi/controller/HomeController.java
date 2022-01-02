@@ -28,8 +28,9 @@ public class HomeController {
 //        pedido.setDescricao("uma descrição qualquer para esse pedido");
 //        List<Pedido> pedidos = Arrays.asList(pedido);
 
-        model.addAttribute("pedidos", repository.findAll());
+        List<Pedido> pedidos = repository.findAll();
 
+        model.addAttribute("pedidos", pedidos);
         return "home";
     }
 }

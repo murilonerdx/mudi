@@ -2,6 +2,7 @@ package br.com.alura.mvc.mudi.controller;
 
 import br.com.alura.mvc.mudi.dto.PedidoDTO;
 import br.com.alura.mvc.mudi.entities.Pedido;
+import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,9 @@ public class PedidoController {
 
         Pedido pedido = new Pedido();
         pedido.toPedido(pedidoDTO);
-
+        pedido.setStatus(StatusPedido.AGUARDANDO);
         pedidoRepository.save(pedido);
 
-        return "pedido/formulario";
+        return "redirect:/home";
     }
 }
