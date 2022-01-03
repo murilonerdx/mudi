@@ -24,8 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .defaultSuccessUrl("/home")
                         .permitAll()
                 )
-                .logout()
-                .permitAll();
+                .logout(logout-> logout.logoutUrl("/logout"));
     }
 
     @Bean
