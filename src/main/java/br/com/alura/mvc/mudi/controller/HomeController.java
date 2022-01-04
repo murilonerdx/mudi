@@ -4,6 +4,8 @@ import br.com.alura.mvc.mudi.entities.Pedido;
 import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +25,8 @@ public class HomeController {
 
     @GetMapping()
     public String home(Model model, Principal principal) {
-        List<Pedido> pedidos = repository.findByStatus(StatusPedido.ENTREGUE);
-
+        List<Pedido> pedidos = repository
+                .findByStatus(StatusPedido.ENTREGUE, PageRequest.of(0,5, Sort.by("dataDaEntrega").descending()));
         model.addAttribute("pedidos", pedidos);
         return "home";
     }
