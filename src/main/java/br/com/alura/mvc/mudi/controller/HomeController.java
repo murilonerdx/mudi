@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.Arrays;
+
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -24,7 +22,7 @@ public class HomeController {
     private PedidoRepository repository;
 
     @GetMapping()
-    public String home(Model model) {
+    public String home(Model model, Principal principal) {
 //        Pedido pedido = new Pedido();
 //        pedido.setNomeProduto("Xiaomi Redmi Note 8");
 //        pedido.setUrlImagem("https://images-na.ssl-images-amazon.com/images/I/81UgYuadkpL._AC_SL1500_.jpg");
@@ -32,7 +30,7 @@ public class HomeController {
 //        pedido.setDescricao("uma descrição qualquer para esse pedido");
 //        List<Pedido> pedidos = Arrays.asList(pedido);
 
-        List<Pedido> pedidos = repository.findAll();
+        List<Pedido> pedidos = repository.findAllByUsuario(principal.getName());
 
 
         model.addAttribute("pedidos", pedidos);

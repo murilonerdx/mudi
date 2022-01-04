@@ -2,11 +2,7 @@ package br.com.alura.mvc.mudi.dto;
 
 import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class PedidoDTO {
     private Long id;
