@@ -46,6 +46,6 @@ public class PedidoController {
         pedido.setStatus(StatusPedido.AGUARDANDO);
 
         pedidoRepository.save(pedido);
-        return "redirect:/home";
+        return "redirect:/usuario";
     }
 }
