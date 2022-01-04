@@ -5,6 +5,8 @@ import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 import br.com.alura.mvc.mudi.repository.PedidoRepository;
 import br.com.alura.mvc.mudi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +37,7 @@ public class UserController {
     @GetMapping("/{status}")
     public String porStatus(@PathVariable("status") String status, Model model) {
         try{
-            List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.valueOf(status.toUpperCase()));
+            List<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.valueOf(status.toUpperCase()), PageRequest.of(0,5, Sort.by("dataDaEntrega").descending()));
             model.addAttribute("pedidos", pedidos);
             model.addAttribute("status", status);
 
