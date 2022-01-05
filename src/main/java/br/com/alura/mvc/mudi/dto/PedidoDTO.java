@@ -1,5 +1,6 @@
 package br.com.alura.mvc.mudi.dto;
 
+import br.com.alura.mvc.mudi.entities.Pedido;
 import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 
 import javax.validation.constraints.NotBlank;
@@ -26,6 +27,9 @@ public class PedidoDTO {
         this.urlImagem = urlImagem;
         this.descricao = descricao;
         this.status = status;
+    }
+
+    public PedidoDTO() {
     }
 
     public Long getId() {
@@ -74,5 +78,14 @@ public class PedidoDTO {
 
     public void setStatus(StatusPedido status) {
         this.status = status;
+    }
+
+    public PedidoDTO toDto(Pedido pedido){
+        this.descricao = pedido.getDescricao();
+        this.status = pedido.getStatus();
+        this.nomeProduto = pedido.getNomeProduto();
+        this.urlImagem = pedido.getUrlImagem();
+        this.id = pedido.getId();
+        return this;
     }
 }

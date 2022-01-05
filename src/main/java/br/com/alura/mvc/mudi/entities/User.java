@@ -1,5 +1,7 @@
 package br.com.alura.mvc.mudi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "users")
 public class User {
 
