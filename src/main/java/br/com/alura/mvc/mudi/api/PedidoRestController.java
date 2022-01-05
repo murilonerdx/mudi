@@ -23,13 +23,17 @@ public class PedidoRestController {
     private PedidoRepository pedidoRepository;
 
     @GetMapping("/aguardando")
-    public List<PedidoDTO> getPedidosAguardandoOferta(){
+    public List<Pedido> getPedidosAguardandoOferta(){
         Sort sort = Sort.by("id").descending();
         PageRequest paginacao = PageRequest.of(0, 10 , sort);
 
-        return pedidoRepository
-                .findByStatus(StatusPedido.AGUARDANDO, paginacao)
-                .stream()
-                .map(x-> new PedidoDTO().toDto(x)).collect(Collectors.toList());
+
+        //Caso for DTO
+//        return pedidoRepository
+//                .findByStatus(StatusPedido.AGUARDANDO, paginacao)
+//                .stream()
+//                .map(x-> new PedidoDTO().toDto(x)).collect(Collectors.toList());
+
+        return pedidoRepository.findByStatus(StatusPedido.AGUARDANDO, paginacao);
     }
 }

@@ -2,6 +2,7 @@ package br.com.alura.mvc.mudi.entities;
 
 import br.com.alura.mvc.mudi.dto.PedidoDTO;
 import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ public class Pedido {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @JsonIgnore
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="pedido")
     List<Oferta> ofertas = new ArrayList<>();
 
