@@ -5,6 +5,8 @@ import br.com.alura.mvc.mudi.entities.enums.StatusPedido;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -33,6 +35,9 @@ public class Pedido {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="pedido")
+    List<Oferta> ofertas = new ArrayList<>();
 
     public String getNomeProduto() {
         return nomeProduto;
@@ -114,5 +119,13 @@ public class Pedido {
         this.descricao = pedidoDTO.getDescricao();
         this.status = pedidoDTO.getStatus();
         return this;
+    }
+
+    public List<Oferta> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<Oferta> ofertas) {
+        this.ofertas = ofertas;
     }
 }
